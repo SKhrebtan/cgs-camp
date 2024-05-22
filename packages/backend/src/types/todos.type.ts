@@ -1,5 +1,7 @@
 // TODO: Put a real types here
 
 export type TodoType = {
-	data: string;
+	title: string;
+	description?: string | null;
+	isCompleted: boolean;
 };
