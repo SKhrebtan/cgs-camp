@@ -2,6 +2,7 @@ import { tryCatchWrapper, validateBody, isExist } from '@/middlewares';
 import { Router } from 'express';
 import todoController from '@/controllers/todo.controller';
 import { todoSchema } from '@/schema/todo.schema';
+import { PrismaModels } from '@/types/models.enum';
 
 const todosRouter: Router = Router();
 
@@ -12,7 +13,7 @@ todosRouter.get(
 
 todosRouter.get(
 	'/:id',
-	isExist(),
+	isExist(PrismaModels.TODO),
 	tryCatchWrapper(todoController.getTodoById.bind(todoController)),
 );
 
@@ -24,13 +25,13 @@ todosRouter.post(
 
 todosRouter.delete(
 	'/:id',
-	isExist(),
+	isExist(PrismaModels.TODO),
 	tryCatchWrapper(todoController.deleteTodo.bind(todoController)),
 );
 
 todosRouter.put(
 	'/:id',
-	isExist(),
+	isExist(PrismaModels.TODO),
 	validateBody(todoSchema),
 	tryCatchWrapper(todoController.updateTodo.bind(todoController)),
 );
