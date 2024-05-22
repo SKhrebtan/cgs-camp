@@ -1,4 +1,3 @@
 export enum PrismaModels {
-	TODO = 'todo',
-	USER = 'user',
+	todo = 'todo',
 }

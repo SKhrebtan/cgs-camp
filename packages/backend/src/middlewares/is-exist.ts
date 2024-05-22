@@ -1,8 +1,9 @@
 import { HttpError } from '@/helpers/http-error';
 import { Request, Response, NextFunction, RequestHandler } from 'express';
-import { prisma } from '@/services/todo.service';
 import { PrismaModels } from '@/types/models.enum';
-export const isExist = (modelName: PrismaModels): RequestHandler => {
+import { prisma } from '@/services/todo.service';
+
+export const isExist = (prismaModel: PrismaModels): RequestHandler => {
 	return async (req: Request, res: Response, next: NextFunction) => {
 		try {
 			const { id } = req.params;
@@ -12,30 +13,14 @@ export const isExist = (modelName: PrismaModels): RequestHandler => {
 				return;
 			}
 
-			let model;
+			const item = await prisma[prismaModel].findFirst({
+				where: { id: Number(id) },
+			});
 
-			switch (modelName) {
-				case PrismaModels.TODO:
-					model = await prisma.todo.findUnique({
-						where: { id: Number(id) },
-					});
-					break;
-				case PrismaModels.USER:
-					model = await prisma.user.findUnique({
-						where: { id: Number(id) },
-					});
-					break;
-				default:
-					return res
-						.status(500)
-						.json({ error: 'Invalid model name' });
-			}
-
-			if (!model) {
+			if (!item) {
 				next(HttpError(404, `Todo with id ${id} not found`));
 				return;
 			}
-
 			next();
 		} catch (error) {
 			next(error);

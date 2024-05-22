@@ -13,7 +13,7 @@ todosRouter.get(
 
 todosRouter.get(
 	'/:id',
-	isExist(PrismaModels.TODO),
+	isExist(PrismaModels.todo),
 	tryCatchWrapper(todoController.getTodoById.bind(todoController)),
 );
 
@@ -25,13 +25,13 @@ todosRouter.post(
 
 todosRouter.delete(
 	'/:id',
-	isExist(PrismaModels.TODO),
+	isExist(PrismaModels.todo),
 	tryCatchWrapper(todoController.deleteTodo.bind(todoController)),
 );
 
 todosRouter.put(
 	'/:id',
-	isExist(PrismaModels.TODO),
+	isExist(PrismaModels.todo),
 	validateBody(todoSchema),
 	tryCatchWrapper(todoController.updateTodo.bind(todoController)),
 );
