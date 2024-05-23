@@ -1,7 +1,10 @@
 import * as React from 'react';
+import { wrapperStyles, loaderStyles } from './loader.styles';
 
-const Loader: React.FunctionComponent = () => {
-	return <div>Loading...</div>;
+export const Loader: React.FunctionComponent = () => {
+	return (
+		<div className={wrapperStyles}>
+			<div className={loaderStyles}></div>
+		</div>
+	);
 };
-
-export default Loader;

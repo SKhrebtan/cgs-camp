@@ -42,6 +42,15 @@
 			],
 			"~/*": [
 				"src/*"
+			],
+			"~types/*": [
+				"src/types/*"
+			],
+			"~common/*": [
+				"src/common/*"
+			],
+			"~constants/*": [
+				"src/common/constants/*"
 			]
 		}
 	},
