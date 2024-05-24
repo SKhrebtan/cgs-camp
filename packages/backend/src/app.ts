@@ -24,11 +24,13 @@ app.use((req: Request, res: Response) => {
 
 app.use(
 	(err: CustomError, req: Request, res: Response, _next: NextFunction) => {
+		console.log(err);
 		const status = err.status || 500;
 		const message = err.message || 'Internal Server Error!';
 		res.status(status).json({ message });
 	},
 );
+
 app.listen(port, () => {
 	console.log(`Now listening on port ${port}`);
 });

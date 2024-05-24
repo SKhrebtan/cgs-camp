@@ -1,18 +1,20 @@
 import { CustomError } from '@/types/errors.type';
 
-const errorMessageList: { [key: number]: string } = {
+const errorMessageList: Record<number, string> = {
 	400: 'Bad Request',
 	401: 'Unauthorized',
+	402: 'Payment Required',
 	403: 'Forbidden',
-	404: 'Not found',
+	404: 'Not Found',
+	408: 'Request Timeout',
 	409: 'Conflict',
 };
 
 export const HttpError = (
 	status: number,
-	message: string = errorMessageList[status],
+	message = errorMessageList[status],
 ): CustomError => {
-	const error: CustomError = new Error(message);
+	const error = new Error(message) as CustomError;
 	error.status = status;
 	return error;
 };
