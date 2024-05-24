@@ -46,22 +46,18 @@ export const Form: React.FC<FormProps> = ({ id, todo, type, closeModal }) => {
 				onChange={formik.handleChange}
 				onBlur={formik.handleBlur}
 				value={formik.values.title}
-			>
-				{formik.touched.title && formik.errors.title ? (
-					<div>{formik.errors.title}</div>
-				) : null}
-			</CustomInput>
+				formikTouched={formik.touched.title}
+				formikError={formik.errors.title}
+			/>
 			<CustomInput
 				inuptStyles={inuptStyles}
 				name="description"
 				onChange={formik.handleChange}
 				onBlur={formik.handleBlur}
 				value={formik.values.description}
-			>
-				{formik.touched.title && formik.errors.title ? (
-					<div>{formik.errors.title}</div>
-				) : null}
-			</CustomInput>
+				formikTouched={formik.touched.title}
+				formikError={formik.errors.title}
+			/>
 			<div className={inuptStyles}>
 				<label htmlFor="description">Description</label>
 				<textarea

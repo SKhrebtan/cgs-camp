@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { listStyles, wrapperStyles } from './todolist.styles';
 import { useGetAllTodos } from '../../services/todos/tanstack.js';
 import { useModal, useMediaObserver } from '~shared/utils';
@@ -13,11 +13,9 @@ import {
 
 export const TodoList: React.FC = () => {
 	const mediaWatcher = useMediaObserver();
-	const { data, isLoading, error, refetch } = useGetAllTodos();
+	const { data, isLoading, error } = useGetAllTodos();
 	const { isOpen, openModal, closeModal } = useModal();
-	useEffect(() => {
-		refetch();
-	}, [refetch]);
+
 	return (
 		<div className={wrapperStyles}>
 			<button

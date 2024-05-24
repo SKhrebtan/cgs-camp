@@ -1,20 +1,22 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 interface CustomInputProps {
-	children: ReactNode;
 	inuptStyles: string;
 	name: string;
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
 	value: string;
+	formikTouched?: boolean;
+	formikError?: string;
 }
 export const CustomInput: React.FC<CustomInputProps> = ({
-	children,
 	inuptStyles,
 	name,
 	onChange,
 	onBlur,
 	value,
+	formikTouched,
+	formikError,
 }) => {
 	return (
 		<div className={inuptStyles}>
@@ -28,7 +30,8 @@ export const CustomInput: React.FC<CustomInputProps> = ({
 				onBlur={onBlur}
 				value={value}
 			/>
-			{children}
+
+			{formikTouched && formikError ? <div>{formikError}</div> : null}
 		</div>
 	);
 };
