@@ -1,10 +1,11 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import { formSchema } from '~shared/schemas/form-schema.js';
 import { useAddNewTodo, useUpdateTodo } from '../../services/todos/tanstack.js';
 import { formStyles, inuptStyles, btnBlockStyles } from './form.styles.js';
 import { useEffect } from 'react';
 import { Todo } from '~/types/todo.type.js';
+import { CustomInput } from '../input/input.component';
 
 type FormProps = {
 	id?: string;
@@ -26,14 +27,7 @@ export const Form: React.FC<FormProps> = ({ id, todo, type, closeModal }) => {
 			title: type === 'edit' ? todo.title : '',
 			description: type === 'edit' ? todo.description : '',
 		},
-		validationSchema: Yup.object({
-			title: Yup.string()
-				.max(50, 'Title must be 20 characters or less')
-				.required('Title is required'),
-			description: Yup.string()
-				.max(200, 'Description must be 100 characters or less')
-				.required('Description is required'),
-		}),
+		validationSchema: formSchema,
 		onSubmit: async (values) => {
 			type === 'edit'
 				? await updateMutate({ id, body: { ...values } })
@@ -46,21 +40,28 @@ export const Form: React.FC<FormProps> = ({ id, todo, type, closeModal }) => {
 	}, [isSuccess, isUpdateSuccess]);
 	return (
 		<form className={formStyles} onSubmit={formik.handleSubmit}>
-			<div className={inuptStyles}>
-				<label htmlFor="title">Title</label>
-				<input
-					className="bp5-input bp5-round"
-					id="title"
-					name="title"
-					type="text"
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.title}
-				/>
+			<CustomInput
+				inuptStyles={inuptStyles}
+				name="title"
+				onChange={formik.handleChange}
+				onBlur={formik.handleBlur}
+				value={formik.values.title}
+			>
 				{formik.touched.title && formik.errors.title ? (
 					<div>{formik.errors.title}</div>
 				) : null}
-			</div>
+			</CustomInput>
+			<CustomInput
+				inuptStyles={inuptStyles}
+				name="description"
+				onChange={formik.handleChange}
+				onBlur={formik.handleBlur}
+				value={formik.values.description}
+			>
+				{formik.touched.title && formik.errors.title ? (
+					<div>{formik.errors.title}</div>
+				) : null}
+			</CustomInput>
 			<div className={inuptStyles}>
 				<label htmlFor="description">Description</label>
 				<textarea

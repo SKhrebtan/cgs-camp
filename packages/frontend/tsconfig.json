@@ -51,6 +51,9 @@
 			],
 			"~constants/*": [
 				"src/common/constants/*"
+			],
+			"~schemas/*": [
+				"src/shared/schemas/*"
 			]
 		}
 	},

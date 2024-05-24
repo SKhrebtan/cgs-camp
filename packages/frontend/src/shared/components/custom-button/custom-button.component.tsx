@@ -32,9 +32,6 @@ export const CustomButton: React.FunctionComponent<IButtonProps> = ({
 	const isDisabled = Boolean(loading ?? disabled);
 
 	const handleClick = (): void => {
-		if (isDisabled) {
-			return;
-		}
 		onClick?.();
 	};
 	return (

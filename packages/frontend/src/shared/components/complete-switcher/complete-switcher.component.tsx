@@ -13,14 +13,14 @@ export const CompleteSwitcher: React.FC<CompleteWitcherProps> = ({
 	isCompleted,
 }) => {
 	const { mutate } = useUpdateTodo();
-
+	const handleUpdate = (id, isCompleted): void => {
+		mutate({ id: String(id), body: { isCompleted: !isCompleted } });
+	};
 	return (
 		<button
 			className={buttonStyles}
 			type="button"
-			onClick={() =>
-				mutate({ id: String(id), body: { isCompleted: !isCompleted } })
-			}
+			onClick={() => handleUpdate(id, isCompleted)}
 		>
 			{isCompleted ? (
 				<motion.div

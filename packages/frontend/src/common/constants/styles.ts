@@ -12,6 +12,8 @@ export const THEME_CSS = {
 		viewButtonColor: '#f5f5dc',
 		modalWrapperBg: '#d1d5db80',
 		modalBackground: '#ffffff',
+		tableMainColor: '#dddddd',
+		tableSecondColor: '#f2f2f2',
 	},
 	text: {
 		fontTitle: '18px',

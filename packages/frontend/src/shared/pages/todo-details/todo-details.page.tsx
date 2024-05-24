@@ -11,7 +11,6 @@ const TodoDetailsPage: React.FC = () => {
 	const { isOpen, openModal, closeModal } = useModal();
 	const location = useLocation();
 	const backLinkLocationRef = useRef(location.state?.from ?? '/todos');
-
 	return isPending ? (
 		<Loader />
 	) : (
@@ -47,12 +46,3 @@ const TodoDetailsPage: React.FC = () => {
 };
 
 export default TodoDetailsPage;
-
-// import { useTodoStore } from '~/store/todos.store';
-// import { Todo } from '~/types/todo.type';
-// const fetchTodoById = useTodoStore((state) => state.fetchTodoById);
-// const todo: Todo = useTodoStore((state) => state.todo);
-// useEffect(() => {
-// 	if (!todoId) return;
-// 	fetchTodoById(Number(todoId));
-// }, [fetchTodoById]);

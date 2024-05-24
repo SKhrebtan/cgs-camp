@@ -18,7 +18,6 @@ export const TodoList: React.FC = () => {
 	useEffect(() => {
 		refetch();
 	}, [refetch]);
-
 	return (
 		<div className={wrapperStyles}>
 			<button

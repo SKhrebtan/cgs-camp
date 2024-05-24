@@ -18,7 +18,7 @@ export const isExist = (prismaModel: PrismaModels): RequestHandler => {
 			});
 
 			if (!item) {
-				next(HttpError(404, `Todo with id ${id} not found`));
+				next(HttpError(404, `Instance with id ${id} not found`));
 				return;
 			}
 			next();

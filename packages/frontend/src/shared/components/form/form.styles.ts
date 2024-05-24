@@ -13,6 +13,10 @@ export const inuptStyles = css`
 	gap: 20px;
 `;
 
+export const textareaStyles = css`
+	height: 60px;
+`;
+
 export const btnBlockStyles = css`
 	display: flex;
 	justify-content: center;

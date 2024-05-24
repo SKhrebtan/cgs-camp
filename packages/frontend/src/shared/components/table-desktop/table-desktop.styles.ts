@@ -1,25 +1,25 @@
+import { THEME_CSS } from '~/common/constants/styles';
 import { css } from '@emotion/css';
-
 export const tableStyles = css`
 	width: 100%;
 
 	th,
 	td {
 		padding: 8px;
-		border-bottom: 1px solid #ddd;
+		border-bottom: 1px solid ${THEME_CSS.colors.tableMainColor};
 		text-align: left;
 	}
 
 	th {
-		background-color: #f2f2f2;
+		background-color: ${THEME_CSS.colors.tableSecondColor};
 	}
 
 	tr:nth-child(even) {
-		background-color: #f2f2f2;
+		background-color: ${THEME_CSS.colors.tableSecondColor};
 	}
 
 	tr:hover {
-		background-color: #ddd;
+		background-color: ${THEME_CSS.colors.tableMainColor};
 	}
 `;
 export const actionTHStyles = css`

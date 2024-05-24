@@ -13,7 +13,7 @@ import { ROUTER_KEYS } from '~/common/constants/routers';
 const App = (): React.ReactNode => {
 	return (
 		<Routes>
-			<Route path="/" element={<Layout />}>
+			<Route path={ROUTER_KEYS.HOME.ROOT} element={<Layout />}>
 				<Route index element={<HomePage />} />
 				<Route path={ROUTER_KEYS.TODOS.ROOT} element={<TodosPage />} />
 				<Route
