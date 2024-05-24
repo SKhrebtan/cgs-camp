@@ -1,5 +1,6 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
 import 'dotenv/config';
+import cors from 'cors';
 import bodyParser from 'body-parser';
 import AppRouter from './routes';
 import { CustomError } from './types/errors.type';
@@ -7,6 +8,7 @@ import { CustomError } from './types/errors.type';
 const port = 3030;
 const app: Express = express();
 const router = new AppRouter(app);
+app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
