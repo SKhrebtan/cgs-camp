@@ -20,6 +20,7 @@ model User {
   token String?
   verified Boolean @default(false)
   verificationToken String?
+  todo    Todo[]
 }
 
 model Todo {
@@ -27,4 +28,7 @@ model Todo {
   title String  @unique
   description  String?
   isCompleted Boolean @default(false)
+  isPrivate Boolean @default(true)
+  authorId  Int
+  author      User     @relation(fields: [authorId], references: [id])
 }

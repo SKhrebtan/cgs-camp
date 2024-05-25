@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { tryCatchWrapper, validateBody, authenticate } from '@/middlewares';
 import { userSchema, verifySchema } from '@/schema/user.scema';
 import userController from '@/controllers/user.controller';
+
 const router: Router = Router();
 
 router.post(
