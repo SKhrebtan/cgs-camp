@@ -1,5 +1,5 @@
 import { css } from '@emotion/css';
-// import { THEME_CSS } from '../../styles/constants';
+
 export const wrapperStyles = css`
 	display: flex;
 	flex-direction: column;

@@ -8,6 +8,7 @@ interface CustomInputProps {
 	value: string;
 	formikTouched?: boolean;
 	formikError?: string;
+	type?: string;
 }
 export const CustomInput: React.FC<CustomInputProps> = ({
 	inuptStyles,
@@ -17,6 +18,7 @@ export const CustomInput: React.FC<CustomInputProps> = ({
 	value,
 	formikTouched,
 	formikError,
+	type = 'text',
 }) => {
 	return (
 		<div className={inuptStyles}>
@@ -25,7 +27,7 @@ export const CustomInput: React.FC<CustomInputProps> = ({
 				className="bp5-input bp5-round"
 				id={name}
 				name={name}
-				type="text"
+				type={type}
 				onChange={onChange}
 				onBlur={onBlur}
 				value={value}

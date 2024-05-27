@@ -19,8 +19,9 @@ export class HttpService {
 	}
 
 	private populateTokenToHeaderConfig(): object {
+		const token = JSON.parse(localStorage.getItem('token'));
 		return {
-			Authorization: localStorage.getItem('token'),
+			Authorization: token ? `Bearer ${token}` : '',
 		};
 	}
 

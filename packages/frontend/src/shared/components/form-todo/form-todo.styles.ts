@@ -1,5 +1,4 @@
 import { css } from '@emotion/css';
-// import { THEME_CSS } from '../../../common/constants/styles';
 
 export const formStyles = css`
 	display: flex;

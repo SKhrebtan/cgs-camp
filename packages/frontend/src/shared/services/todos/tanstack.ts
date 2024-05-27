@@ -7,7 +7,7 @@ import {
 } from '@tanstack/react-query';
 import { QUERY_KEYS } from '~/common/constants/queries';
 import { Todo } from '~/types/todo.type';
-import { todoService } from '../todo-service';
+import { todoService } from './todo-service';
 
 function useGetAllTodos(): UseQueryResult<Todo[], Error> {
 	return useQuery<Todo[]>({

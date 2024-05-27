@@ -1,4 +1,4 @@
-import { HttpService } from './http-service';
+import { HttpService } from '../http-service';
 import { Todo } from '~/types/todo.type';
 
 class TodoService extends HttpService {
