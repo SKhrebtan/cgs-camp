@@ -29,12 +29,13 @@ const App = (): React.ReactNode => {
 	useEffect(() => {
 		refresh();
 	}, []);
+
 	return (
 		<Routes>
 			<Route path={ROUTER_KEYS.HOME.ROOT} element={<Layout />}>
 				<Route index element={<HomePage />} />
 				<Route
-					path="/register"
+					path={ROUTER_KEYS.REGISTER.ROOT}
 					element={
 						<RestrictedRoute
 							redirectTo={ROUTER_KEYS.TODOS.ROOT}
@@ -43,7 +44,7 @@ const App = (): React.ReactNode => {
 					}
 				/>
 				<Route
-					path="/login"
+					path={ROUTER_KEYS.LOGIN.ROOT}
 					element={
 						<RestrictedRoute
 							redirectTo={ROUTER_KEYS.TODOS.ROOT}

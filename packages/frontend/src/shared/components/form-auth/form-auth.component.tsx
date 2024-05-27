@@ -6,34 +6,45 @@ import {
 	inuptStyles,
 	btnBlockStyles,
 	error,
+	success,
 } from './form-auth.styles';
 import { CustomInput } from '../input/input.component.js';
 import { useUserStore } from '~store/user.store';
 import { authService } from '~shared/services/auth/auth-service';
 import { useState } from 'react';
+import { authInitial } from '~/common/constants/initialValues';
 interface FormAuthProps {
 	register: boolean;
 }
 
 export const FormAuth: React.FC<FormAuthProps> = ({ register }) => {
 	const [errorState, setErrorState] = useState(null);
+	const [successState, setSuccessState] = useState(null);
 	const { login } = useUserStore((state) => state);
-	const formik = useFormik({
-		initialValues: {
-			email: '',
-			password: '',
-		},
-		validationSchema: formAuthSchema,
-		onSubmit: async (values) => {
-			setErrorState(null);
-			try {
-				register
-					? await authService.register(values)
-					: await login(values);
-			} catch (error) {
-				setErrorState(error.message);
+	const handleSubmit = async (
+		values,
+		register,
+		setErrorState,
+		login,
+	): Promise<void> => {
+		setErrorState(null);
+		setSuccessState(null);
+		try {
+			if (register) {
+				await authService.register(values);
+				setSuccessState('Registartion is successfull, check email');
+			} else {
+				await login(values);
 			}
-		},
+		} catch (error) {
+			setErrorState(error.message);
+		}
+	};
+	const formik = useFormik({
+		initialValues: authInitial,
+		validationSchema: formAuthSchema,
+		onSubmit: (values) =>
+			handleSubmit(values, register, setErrorState, login),
 	});
 
 	return (
@@ -63,6 +74,7 @@ export const FormAuth: React.FC<FormAuthProps> = ({ register }) => {
 					{register ? 'Register' : 'Login'}
 				</button>
 			</div>
+			{successState && <p className={success}>{successState}</p>}
 			{errorState && <p className={error}>{errorState}</p>}
 		</form>
 	);

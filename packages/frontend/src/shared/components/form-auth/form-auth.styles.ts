@@ -1,20 +1,20 @@
 import { css } from '@emotion/css';
-
+import { THEME_CSS } from '~/common/constants/styles';
 export const formStyles = css`
 	max-width: 400px;
 	margin: 0 auto;
 	padding: 20px;
-	border: 1px solid #ccc;
+	border: 1px solid ${THEME_CSS.colors.borderColor};
 	border-radius: 5px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	background-color: #f9f9f9;
+	box-shadow: ${THEME_CSS.colors.formShadows};
+	background-color: ${THEME_CSS.colors.formBackground};
 `;
 
 export const inuptStyles = css`
 	width: 100%;
 	padding: 8px;
 	margin-bottom: 10px;
-	border: 1px solid #ccc;
+	border: 1px solid ${THEME_CSS.colors.borderColor};
 	border-radius: 3px;
 	box-sizing: border-box;
 	display: flex;
@@ -33,7 +33,13 @@ export const btnBlockStyles = css`
 `;
 
 export const error = css`
-	color: #dc3545;
+	color: ${THEME_CSS.colors.errorColor};
+	font-size: 14px;
+	margin-top: 5px;
+`;
+
+export const success = css`
+	color: ${THEME_CSS.colors.textSuccessColor};
 	font-size: 14px;
 	margin-top: 5px;
 `;

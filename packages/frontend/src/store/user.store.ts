@@ -14,7 +14,7 @@ interface IUserStore {
 export const useUserStore = create<IUserStore>()(
 	persist(
 		(set) => ({
-			token: null,
+			token: JSON.parse(localStorage.getItem('token')),
 			email: null,
 			login: async (body): Promise<void> => {
 				const data = await authService.login(body);
@@ -31,7 +31,7 @@ export const useUserStore = create<IUserStore>()(
 		}),
 		{
 			name: 'user-storage',
-			partialize: (state) => ({ token: state.token, email: state.email }),
+			partialize: (state) => ({ email: state.email }),
 		},
 	),
 );

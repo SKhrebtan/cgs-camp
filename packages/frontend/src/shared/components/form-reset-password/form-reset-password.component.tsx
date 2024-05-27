@@ -11,6 +11,7 @@ import {
 import { CustomInput } from '../input/input.component.js';
 import { authService } from '~shared/services/auth/auth-service';
 import { useState } from 'react';
+import { resetInitials } from '~/common/constants/initialValues';
 interface FormResetProps {
 	token: string;
 }
@@ -18,10 +19,7 @@ export const FormResetPassword: React.FC<FormResetProps> = ({ token }) => {
 	const [errorState, setErrorState] = useState<string | null>(null);
 	const [passwordSuccess, setPasswordSuccess] = useState<string | null>(null);
 	const formik = useFormik({
-		initialValues: {
-			password: '',
-			repeatPassword: '',
-		},
+		initialValues: resetInitials,
 		validationSchema: formResetSchema,
 		onSubmit: async (values, { resetForm }) => {
 			setErrorState(null);

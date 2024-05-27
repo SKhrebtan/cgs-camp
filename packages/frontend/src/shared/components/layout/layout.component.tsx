@@ -11,6 +11,7 @@ import {
 import { useTheme } from '@emotion/react';
 import { Loader } from '~shared/components/loader/loader.component.js';
 import { useUserStore } from '~store/user.store';
+import { ROUTER_KEYS } from '~/common/constants/routers';
 export const Layout: React.FC = () => {
 	const isLoggedIn = useUserStore((state) => state.token);
 	const logout = useUserStore((state) => state.logout);
@@ -23,13 +24,19 @@ export const Layout: React.FC = () => {
 				<nav className={navStyles}>
 					<ul className={listStyles}>
 						<li>
-							<NavLink className={linkStyles} to="/">
+							<NavLink
+								className={linkStyles}
+								to={ROUTER_KEYS.HOME.ROOT}
+							>
 								Home
 							</NavLink>
 						</li>
 						{isLoggedIn && (
 							<li>
-								<NavLink className={linkStyles} to="/todos">
+								<NavLink
+									className={linkStyles}
+									to={ROUTER_KEYS.TODOS.ROOT}
+								>
 									Todos
 								</NavLink>
 							</li>
@@ -37,14 +44,17 @@ export const Layout: React.FC = () => {
 						{!isLoggedIn && (
 							<>
 								<li>
-									<NavLink className={linkStyles} to="/login">
+									<NavLink
+										className={linkStyles}
+										to={ROUTER_KEYS.LOGIN.ROOT}
+									>
 										Login
 									</NavLink>
 								</li>
 								<li>
 									<NavLink
 										className={linkStyles}
-										to="/register"
+										to={ROUTER_KEYS.REGISTER.ROOT}
 									>
 										Register
 									</NavLink>
@@ -54,7 +64,10 @@ export const Layout: React.FC = () => {
 					</ul>
 					{isLoggedIn && (
 						<div className={settingsStyles}>
-							<NavLink className={linkStyles} to="/settings">
+							<NavLink
+								className={linkStyles}
+								to={ROUTER_KEYS.SETTINGS.ROOT}
+							>
 								Settings
 							</NavLink>
 							<button
