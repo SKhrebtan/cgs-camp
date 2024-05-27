@@ -4,8 +4,9 @@ import TodoService from '@/services/todo.service';
 export class TodoController {
 	constructor(private todoService: TodoService) {}
 
-	async getAllTodo(_: Request, res: Response): Promise<void> {
-		const todos = await this.todoService.findAll();
+	async getAllTodo(req: Request, res: Response): Promise<void> {
+		const { id } = req.user;
+		const todos = await this.todoService.findAll(Number(id));
 		res.send(todos);
 	}
 
@@ -16,7 +17,7 @@ export class TodoController {
 	}
 
 	async createNewTodo(req: Request, res: Response): Promise<void> {
-		const todo = await this.todoService.createTodo(req.body);
+		const todo = await this.todoService.createTodo(req.body, req.user);
 		res.send(todo);
 	}
 

@@ -5,6 +5,11 @@ declare global {
 			DATABASE_URL: string;
 		}
 	}
+	namespace Express {
+		interface Request {
+			user?: User;
+		}
+	}
 }
 
 // If this file has no import/export statements (i.e. is a script)

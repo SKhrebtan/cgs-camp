@@ -1,11 +1,15 @@
 import { PrismaClient } from '@prisma/client';
 import { TodoType } from '@/types/todos.type';
+import { UserType } from '@/types/users.type';
+import { HttpError } from '@/helpers/http-error';
 
 export const prisma = new PrismaClient();
 
 export default class TodoService {
-	async findAll(): Promise<TodoType[]> {
-		const todos = await prisma.todo.findMany();
+	async findAll(userId: number): Promise<TodoType[]> {
+		const todos = await prisma.todo.findMany({
+			where: { authorId: userId },
+		});
 		return todos;
 	}
 
@@ -17,12 +21,17 @@ export default class TodoService {
 		return res;
 	}
 
-	async createTodo(body: TodoType): Promise<TodoType> {
+	async createTodo(body: TodoType, user: UserType): Promise<TodoType> {
 		const { title, description } = body;
+		const { id } = user;
+		if (id === undefined) {
+			throw HttpError(404, 'authorId is required');
+		}
 		const newTodo = {
 			data: {
 				title,
 				description,
+				authorId: id,
 			},
 		};
 		const res = await prisma.todo.create(newTodo);
