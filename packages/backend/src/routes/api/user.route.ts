@@ -29,15 +29,15 @@ router.post(
 );
 
 router.post(
-	'/change-password',
+	'/forgot-password',
 	validateBody(verifySchema),
-	tryCatchWrapper(userController.changePassword.bind(userController)),
+	tryCatchWrapper(userController.forgotPassword.bind(userController)),
 );
 
 router.post(
 	'/reset-password',
 	validateBody(verifySchema),
-	tryCatchWrapper(userController.resetPassword.bind(userController)),
+	tryCatchWrapper(userController.changePassword.bind(userController)),
 );
 
 router.get(

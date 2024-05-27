@@ -28,15 +28,15 @@ export class UserController {
 		res.send(user);
 	}
 
-	async changePassword(req: Request, res: Response): Promise<void> {
+	async forgotPassword(req: Request, res: Response): Promise<void> {
 		const { email } = req.body;
-		const user = await this.userService.changePassword(email);
+		const user = await this.userService.forgotPassword(email);
 		res.send(user);
 	}
 
-	async resetPassword(req: Request, res: Response): Promise<void> {
+	async changePassword(req: Request, res: Response): Promise<void> {
 		const { email, token } = req.body;
-		const user = await this.userService.resetPassword(email, token);
+		const user = await this.userService.changePassword(email, token);
 		res.send(user);
 	}
 

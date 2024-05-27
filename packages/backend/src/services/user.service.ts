@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { sendMail } from '@/helpers/mail-service';
 import { nanoid } from 'nanoid';
+import { AuthType } from '@/types/auth.type';
 
 const { SECRET_KEY, BASE_URL } = process.env;
 
@@ -15,13 +16,7 @@ if (!SECRET_KEY) {
 export const prisma = new PrismaClient();
 
 export default class UserService {
-	async register({
-		email,
-		password,
-	}: {
-		email: string;
-		password: string;
-	}): Promise<UserType> {
+	async register({ email, password }: AuthType): Promise<UserType> {
 		const user = await prisma.user.findFirst({ where: { email } });
 		if (user) {
 			throw HttpError(409, 'Email already exists');
@@ -42,20 +37,14 @@ export default class UserService {
 		return { email };
 	}
 
-	async login({
-		email,
-		password,
-	}: {
-		email: string;
-		password: string;
-	}): Promise<UserType> {
+	async login({ email, password }: AuthType): Promise<UserType> {
 		const user = await prisma.user.findFirst({ where: { email } });
 		if (!user) {
 			throw HttpError(401, 'Email or password is wrong');
 		}
 
 		if (!user.verified) {
-			throw HttpError(404, 'User not found');
+			throw HttpError(404, 'User not verified');
 		}
 		const passwordCompare = await bcrypt.compare(password, user.password);
 		if (!passwordCompare) {
@@ -118,7 +107,7 @@ export default class UserService {
 		};
 	}
 
-	async changePassword(email: string): Promise<{ message: string }> {
+	async forgotPassword(email: string): Promise<{ message: string }> {
 		const user = await prisma.user.findFirst({ where: { email } });
 
 		if (!user) {
@@ -141,7 +130,7 @@ export default class UserService {
 		};
 	}
 
-	async resetPassword(
+	async changePassword(
 		token: string,
 		newPassword: string,
 	): Promise<{ message: string }> {
