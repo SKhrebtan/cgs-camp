@@ -14,6 +14,12 @@ export const THEME_CSS = {
 		modalBackground: '#ffffff',
 		tableMainColor: '#dddddd',
 		tableSecondColor: '#f2f2f2',
+		resetShadows: '0 4px 8px rgba(0, 0, 0, 0.1)',
+		buttonColor: '#007bff',
+		buttonHoverColor: '#007bff',
+		resetTextColor: '#0056b3',
+		textColor: '#333',
+		textSuccessColor: '#008000',
 	},
 	text: {
 		fontTitle: '18px',

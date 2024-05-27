@@ -1,11 +1,11 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { formSchema } from '~shared/schemas/form-schema.js';
+import { formSchema } from '~shared/schemas/form-todo.schema.js';
 import { useAddNewTodo, useUpdateTodo } from '../../services/todos/tanstack.js';
-import { formStyles, inuptStyles, btnBlockStyles } from './form.styles.js';
+import { formStyles, inuptStyles, btnBlockStyles } from './form-todo.styles.js';
 import { useEffect } from 'react';
 import { Todo } from '~/types/todo.type.js';
-import { CustomInput } from '../input/input.component';
+import { CustomInput } from '../input/input.component.js';
 
 type FormProps = {
 	id?: string;
@@ -15,11 +15,10 @@ type FormProps = {
 };
 
 export const Form: React.FC<FormProps> = ({ id, todo, type, closeModal }) => {
-	const { mutate, isPending, error, isSuccess } = useAddNewTodo();
+	const { mutate, isPending, isSuccess } = useAddNewTodo();
 	const {
 		mutate: updateMutate,
 		isPending: isUpdatePending,
-		error: updateError,
 		isSuccess: isUpdateSuccess,
 	} = useUpdateTodo();
 	const formik = useFormik({
@@ -55,24 +54,10 @@ export const Form: React.FC<FormProps> = ({ id, todo, type, closeModal }) => {
 				onChange={formik.handleChange}
 				onBlur={formik.handleBlur}
 				value={formik.values.description}
-				formikTouched={formik.touched.title}
-				formikError={formik.errors.title}
+				formikTouched={formik.touched.description}
+				formikError={formik.errors.description}
 			/>
-			<div className={inuptStyles}>
-				<label htmlFor="description">Description</label>
-				<textarea
-					className="bp5-input"
-					id="description"
-					name="description"
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.description}
-				/>
-				{formik.touched.description && formik.errors.description ? (
-					<div>{formik.errors.description}</div>
-				) : null}
-			</div>
-			{(error || updateError) && <p>Something went wrong...</p>}
+
 			<div className={btnBlockStyles}>
 				<button
 					className="bp5-button bp5-intent-danger"
