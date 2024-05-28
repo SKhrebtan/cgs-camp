@@ -10,8 +10,11 @@ import { TableDesktop } from './table-desktop/table-desktop.component';
 import { TodoElement } from './todo-element/todo-element.component';
 import { FormAuth } from '~shared/components/form-auth/form-auth.component';
 import { FormResetPassword } from './form-reset-password/form-reset-password.component';
-
+import { AuthWrapper } from './auth-wrapper/auth-wrapper.component';
+import { TodoFilter } from './todo-filter/todo-filter.component';
 export {
+	TodoFilter,
+	AuthWrapper,
 	TodoList,
 	CompleteSwitcher,
 	CustomButton,

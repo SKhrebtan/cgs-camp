@@ -1,12 +1,12 @@
 import React from 'react';
-import { FormAuth } from '~shared/components/';
+import { FormAuth, AuthWrapper } from '~shared/components/';
 
 const LoginPage: React.FC = () => {
 	return (
-		<div>
-			<div>Login</div>
+		<AuthWrapper>
+			<h2>Login</h2>
 			<FormAuth />
-		</div>
+		</AuthWrapper>
 	);
 };
 

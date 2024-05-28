@@ -9,16 +9,18 @@ import { QUERY_KEYS } from '~/common/constants/queries';
 import { Todo } from '~/types/todo.type';
 import { todoService } from './todo-service';
 
-function useGetAllTodos(): UseQueryResult<Todo[], Error> {
+function useGetAllTodos(
+	params: Record<string, string>,
+): UseQueryResult<Todo[], Error> {
 	return useQuery<Todo[]>({
-		queryKey: [`${QUERY_KEYS.TODOS}`],
-		queryFn: todoService.getAllTodos.bind(todoService),
+		queryKey: [QUERY_KEYS.TODOS, params],
+		queryFn: () => todoService.getAllTodos(params),
 	});
 }
 
 function useGetTodoById(id: string): UseQueryResult<Todo, Error> {
 	return useQuery<Todo>({
-		queryKey: [`${QUERY_KEYS.TODO}`, id],
+		queryKey: [QUERY_KEYS.TODO, id],
 		queryFn: () => todoService.getTodoById(id),
 	});
 }
@@ -29,19 +31,19 @@ function useAddNewTodo(): UseMutationResult<Todo, Error, Partial<Todo>> {
 		mutationFn: (body) => todoService.addTodo(body),
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({
-				queryKey: [`${QUERY_KEYS.TODOS}`],
+				queryKey: [QUERY_KEYS.TODOS],
 			});
 		},
 	});
 }
 
-function useDeleteTodo(): UseMutationResult<Todo, Error, string> {
+function useDeleteTodo(): UseMutationResult<Todo, Error, number> {
 	const queryClient = useQueryClient();
-	return useMutation<Todo, Error, string>({
+	return useMutation<Todo, Error, number>({
 		mutationFn: (id) => todoService.deleteTodo(id),
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({
-				queryKey: [`${QUERY_KEYS.TODOS}`],
+				queryKey: [QUERY_KEYS.TODOS],
 			});
 		},
 	});
@@ -57,10 +59,10 @@ function useUpdateTodo(): UseMutationResult<
 		mutationFn: (params) => todoService.updateTodo(params.id, params.body),
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({
-				queryKey: [`${QUERY_KEYS.TODOS}`],
+				queryKey: [QUERY_KEYS.TODOS],
 			});
 			await queryClient.invalidateQueries({
-				queryKey: [`${QUERY_KEYS.TODO}`],
+				queryKey: [QUERY_KEYS.TODO],
 			});
 		},
 	});

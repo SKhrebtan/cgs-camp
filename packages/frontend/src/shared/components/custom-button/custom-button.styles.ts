@@ -1,17 +1,23 @@
 import { css } from '@emotion/css';
 import { THEME_CSS } from '~/common/constants/styles';
 import { colors } from '~shared/styles';
-export const btnStyles = (disabled: boolean, isViewButton: boolean): string => {
+export const btnStyles = (
+	disabled: boolean,
+	isViewButton: boolean,
+	isActive: boolean,
+): string => {
 	return css`
-		width: 80px;
+		width: 75px;
 		padding: 8px 0;
-		font-size: 18px;
+		font-size: ${THEME_CSS.text.fontText};
 		font-weight: 500;
 		color: ${disabled ? colors.imperial : colors.white};
 		background-color: ${disabled
 			? THEME_CSS.colors.disabledColor
 			: isViewButton
-				? THEME_CSS.colors.viewButtonColor
+				? isActive
+					? THEME_CSS.colors.activeColor
+					: THEME_CSS.colors.viewButtonColor
 				: THEME_CSS.colors.deleteColor};
 		border: none;
 		border-radius: 28px;
@@ -20,6 +26,11 @@ export const btnStyles = (disabled: boolean, isViewButton: boolean): string => {
 		transition: box-shadow 0.3s;
 		&:hover {
 			box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+		}
+
+		@media screen and (min-width: 768px) {
+			width: 100px;
+			font-size: ${THEME_CSS.text.fontTitle};
 		}
 	`;
 };

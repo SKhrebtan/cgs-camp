@@ -12,9 +12,9 @@ import { CustomInput } from '../input/input.component.js';
 import { useUserStore } from '~store/user.store';
 import { authService } from '~shared/services/auth/auth-service';
 import { useState } from 'react';
-import { authInitial } from '~/common/constants/initialValues';
+import { authInitial } from '~/common/constants/initial-values';
 interface FormAuthProps {
-	register: boolean;
+	register?: boolean;
 }
 
 export const FormAuth: React.FC<FormAuthProps> = ({ register }) => {

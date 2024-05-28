@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-
+import { TOKEN_KEY } from '~/common/constants/token-key';
 export class HttpService {
 	baseUrl: string;
 	fetchingService: AxiosInstance;
@@ -19,7 +19,7 @@ export class HttpService {
 	}
 
 	private populateTokenToHeaderConfig(): object {
-		const token = JSON.parse(localStorage.getItem('token'));
+		const token = JSON.parse(localStorage.getItem(TOKEN_KEY));
 		return {
 			Authorization: token ? `Bearer ${token}` : '',
 		};
