@@ -6,6 +6,7 @@ import { listStyles, wrapperStyles } from './todo-filter.styles';
 import { CustomInput } from '../input/input.component';
 import { useFormik } from 'formik';
 import { formFilterSchema } from '~shared/schemas/form-filter.schema';
+import { StatusEnum } from '~/common/constants/status';
 import debounce from 'lodash.debounce';
 
 export const TodoFilter: React.FC = (): React.ReactNode => {
@@ -37,7 +38,7 @@ export const TodoFilter: React.FC = (): React.ReactNode => {
 	};
 
 	const handleFilterClick = (status: string): void => {
-		if (status === 'all') {
+		if (status === StatusEnum.All) {
 			setSearchParams((prevSearchParams) => {
 				const updatedParams = new URLSearchParams(prevSearchParams);
 				updatedParams.delete('status');
@@ -78,28 +79,28 @@ export const TodoFilter: React.FC = (): React.ReactNode => {
 					type="button"
 					isViewButton={true}
 					isActive={!status}
-					onClick={() => handleFilterClick('all')}
+					onClick={() => handleFilterClick(StatusEnum.All)}
 				/>
 				<CustomButton
 					text="Completed"
 					type="button"
 					isViewButton={true}
-					isActive={status === 'completed'}
-					onClick={() => handleFilterClick('completed')}
+					isActive={status === StatusEnum.Completed}
+					onClick={() => handleFilterClick(StatusEnum.Completed)}
 				/>
 				<CustomButton
 					text="Public"
 					type="button"
 					isViewButton={true}
-					isActive={status === 'public'}
-					onClick={() => handleFilterClick('public')}
+					isActive={status === StatusEnum.Public}
+					onClick={() => handleFilterClick(StatusEnum.Public)}
 				/>
 				<CustomButton
 					text="Private"
 					type="button"
 					isViewButton={true}
-					isActive={status === 'private'}
-					onClick={() => handleFilterClick('private')}
+					isActive={status === StatusEnum.Private}
+					onClick={() => handleFilterClick(StatusEnum.Private)}
 				/>
 			</div>
 		</div>

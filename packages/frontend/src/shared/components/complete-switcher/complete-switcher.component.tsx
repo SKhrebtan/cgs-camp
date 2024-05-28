@@ -2,12 +2,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { buttonStyles, switcherStyles } from './complete-switcher.styles';
 import { useUpdateTodo } from '../../services/todos/tanstack.js';
-
+import { StatusEnum } from '~/common/constants/status';
 interface CompleteWitcherProps {
 	isCompleted?: boolean;
 	isPrivate?: boolean;
 	id: string;
-	status?: 'completed' | 'private';
+	status?: StatusEnum;
 }
 
 export const CompleteSwitcher: React.FC<CompleteWitcherProps> = ({

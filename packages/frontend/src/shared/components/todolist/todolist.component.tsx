@@ -11,7 +11,7 @@ import {
 	TodoElement,
 	TodoFilter,
 } from '~shared/components';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useParams } from 'react-router-dom';
 import { useMemo } from 'react';
 
 export const TodoList: React.FC = () => {
@@ -37,7 +37,8 @@ export const TodoList: React.FC = () => {
 	} else {
 		delete params.status;
 	}
-
+	const myParams = useParams();
+	console.log(myParams);
 	const mediaWatcher = useMediaObserver();
 	const { data, isLoading, error } = useGetAllTodos(params);
 	const { isOpen, openModal, closeModal } = useModal();
