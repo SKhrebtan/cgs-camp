@@ -6,13 +6,11 @@ export class UserController {
 
 	async register(req: Request, res: Response): Promise<void> {
 		const newUser = await this.userService.register(req.body);
-		console.log(newUser);
 		res.send(newUser);
 	}
 
 	async login(req: Request, res: Response): Promise<void> {
 		const user = await this.userService.login(req.body);
-		console.log(user);
 		res.send(user);
 	}
 
@@ -35,13 +33,12 @@ export class UserController {
 	}
 
 	async changePassword(req: Request, res: Response): Promise<void> {
-		const { email, token } = req.body;
-		const user = await this.userService.changePassword(email, token);
+		const user = await this.userService.changePassword(req.body);
 		res.send(user);
 	}
 
 	async current(req: Request, res: Response): Promise<void> {
-		const user = await this.userService.current(req.body);
+		const user = await this.userService.current(req.user);
 		res.send(user);
 	}
 	async logout(req: Request, res: Response): Promise<void> {

@@ -2,14 +2,26 @@ import { PrismaClient } from '@prisma/client';
 import { TodoType } from '@/types/todos.type';
 import { UserType } from '@/types/users.type';
 import { HttpError } from '@/helpers/http-error';
-
+import { FilterType } from '@/types/filter.type';
 export const prisma = new PrismaClient();
 
 export default class TodoService {
-	async findAll(userId: number): Promise<TodoType[]> {
+	async findAll(userId: number, req: FilterType): Promise<TodoType[]> {
+		const { search, status } = req;
 		const todos = await prisma.todo.findMany({
-			where: { authorId: userId },
+			where: {
+				authorId: userId,
+				AND: [
+					search
+						? { title: { contains: search, mode: 'insensitive' } }
+						: {},
+					status === 'completed' ? { isCompleted: true } : {},
+					status === 'private' ? { isPrivate: true } : {},
+					status === 'public' ? { isPrivate: false } : {},
+				],
+			},
 		});
+
 		return todos;
 	}
 

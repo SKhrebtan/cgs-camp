@@ -6,7 +6,8 @@ export class TodoController {
 
 	async getAllTodo(req: Request, res: Response): Promise<void> {
 		const { id } = req.user;
-		const todos = await this.todoService.findAll(Number(id));
+		const { query } = req;
+		const todos = await this.todoService.findAll(Number(id), query);
 		res.send(todos);
 	}
 

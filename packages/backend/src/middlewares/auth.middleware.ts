@@ -16,8 +16,12 @@ export const authenticate = async (
 	next: NextFunction,
 ): Promise<void> => {
 	const { authorization = '' } = req.headers;
+
 	const [bearer, token] = authorization.split(' ');
 	if (bearer !== 'Bearer' && !token) {
+		next(HttpError(401, 'No token'));
+	}
+	if (!authorization) {
 		next(HttpError(401, 'No token'));
 	}
 

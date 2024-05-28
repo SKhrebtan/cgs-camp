@@ -6,8 +6,8 @@ import jwt from 'jsonwebtoken';
 import { sendMail } from '@/helpers/mail-service';
 import { nanoid } from 'nanoid';
 import { AuthType } from '@/types/auth.type';
-
-const { SECRET_KEY, BASE_URL } = process.env;
+import { ResetPasswordType } from '@/types/reset-password.type';
+const { SECRET_KEY, BASE_URL, BASE_FRONTEND_URL } = process.env;
 
 if (!SECRET_KEY) {
 	throw new Error('SECRET_KEY is not defined');
@@ -117,7 +117,7 @@ export default class UserService {
 		const token = jwt.sign({ email }, SECRET_KEY as string, {
 			expiresIn: '1h',
 		});
-		const link = `${BASE_URL}/api/user/reset-password/${token}`;
+		const link = `${BASE_FRONTEND_URL}/reset-password?token=${token}`;
 		const verifyEmail = {
 			to: email,
 			subject: 'Reset password',
@@ -130,10 +130,11 @@ export default class UserService {
 		};
 	}
 
-	async changePassword(
-		token: string,
-		newPassword: string,
-	): Promise<{ message: string }> {
+	async changePassword({
+		newPassword,
+		token,
+	}: ResetPasswordType): Promise<{ message: string }> {
+		console.log(token, newPassword);
 		const decoded = jwt.verify(token, SECRET_KEY as string);
 
 		if (typeof decoded === 'string' || !('email' in decoded)) {
@@ -142,7 +143,6 @@ export default class UserService {
 
 		const { email } = decoded;
 		const user = await prisma.user.findFirst({ where: { email } });
-
 		if (!user) {
 			throw HttpError(401, 'Invalid token');
 		}
@@ -158,8 +158,8 @@ export default class UserService {
 		};
 	}
 
-	async current(body: UserType): Promise<{ email: string }> {
-		const { email } = body;
+	async current(user: UserType): Promise<{ email: string }> {
+		const { email } = user;
 		return {
 			email,
 		};
