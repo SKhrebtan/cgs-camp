@@ -1,11 +1,11 @@
 import React from 'react';
-import { FormAuth } from '~shared/components/';
+import { FormAuth, AuthWrapper } from '~shared/components/';
 const RegisterPage: React.FC = () => {
 	return (
-		<div>
-			<div>Register</div>
+		<AuthWrapper>
+			<h2>Register</h2>
 			<FormAuth register={true} />
-		</div>
+		</AuthWrapper>
 	);
 };
 

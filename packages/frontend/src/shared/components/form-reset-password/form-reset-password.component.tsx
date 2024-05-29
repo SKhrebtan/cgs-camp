@@ -11,7 +11,7 @@ import {
 import { CustomInput } from '../input/input.component.js';
 import { authService } from '~shared/services/auth/auth-service';
 import { useState } from 'react';
-import { resetInitials } from '~/common/constants/initialValues';
+import { resetInitials } from '~/common/constants/initial-values';
 interface FormResetProps {
 	token: string;
 }

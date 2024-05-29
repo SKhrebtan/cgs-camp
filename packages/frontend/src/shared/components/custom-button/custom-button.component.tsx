@@ -17,6 +17,7 @@ type IButtonProps = {
 	extraButtonStyles?: string | object;
 	icon?: React.ReactNode;
 	isViewButton?: boolean;
+	isActive?: boolean;
 };
 
 export const CustomButton: React.FunctionComponent<IButtonProps> = ({
@@ -28,6 +29,7 @@ export const CustomButton: React.FunctionComponent<IButtonProps> = ({
 	extraButtonStyles,
 	icon,
 	isViewButton,
+	isActive,
 }) => {
 	const isDisabled = Boolean(loading ?? disabled);
 
@@ -40,7 +42,7 @@ export const CustomButton: React.FunctionComponent<IButtonProps> = ({
 			type={type}
 			onClick={handleClick}
 			className={classNames(
-				btnStyles(Boolean(disabled), isViewButton),
+				btnStyles(Boolean(disabled), isViewButton, isActive),
 				extraButtonStyles,
 			)}
 		>

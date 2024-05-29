@@ -26,6 +26,7 @@ export const THEME_CSS = {
 		errorColor: '#dc3545',
 	},
 	text: {
+		fontH2: '24px',
 		fontTitle: '18px',
 		fontText: '14px',
 	},

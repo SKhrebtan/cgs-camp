@@ -1,8 +1,7 @@
 import { HttpService } from '../http-service';
 import { Auth, ResetPasswordResponse, LoginResponse } from '~/types/auth.type';
 import { ResetPassword } from '~/types/reset-password';
-
-export const TOKEN_KEY = 'token';
+import { TOKEN_KEY } from '~/common/constants/token-key';
 
 class AuthService extends HttpService {
 	#token = null;

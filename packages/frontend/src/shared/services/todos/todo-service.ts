@@ -6,8 +6,11 @@ class TodoService extends HttpService {
 		super();
 	}
 
-	async getAllTodos(): Promise<Todo[]> {
-		const { data } = await this.get({ url: 'todos/all' });
+	async getAllTodos(params): Promise<Todo[]> {
+		const { data } = await this.get({
+			url: 'todos/all',
+			params,
+		});
 		return data;
 	}
 
@@ -32,7 +35,7 @@ class TodoService extends HttpService {
 		return data;
 	}
 
-	async deleteTodo(id: string): Promise<Todo> {
+	async deleteTodo(id: number): Promise<Todo> {
 		const { data } = await this.delete({ url: `todos/${id}` });
 		return data;
 	}

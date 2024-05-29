@@ -43,11 +43,15 @@ export const TodoElement: React.FC<TodoElementProps> = ({ details, todo }) => {
 					text={isPending ? 'Deleting...' : 'Delete'}
 					onClick={() => {
 						navigate('/todos');
-						mutate(String(id));
+						mutate(id);
 					}}
 				/>
 
-				<CompleteSwitcher id={id} isCompleted={isCompleted} />
+				<CompleteSwitcher
+					id={String(id)}
+					isCompleted={isCompleted}
+					status="completed"
+				/>
 			</div>
 		</div>
 	);

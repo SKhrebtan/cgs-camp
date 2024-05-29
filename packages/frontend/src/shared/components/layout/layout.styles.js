@@ -39,6 +39,5 @@ export const linkStyles = css`
 export const mainStyles = css`
 	padding: 20px;
 	display: flex;
-	justify-content: center;
 	position: relative;
 `;

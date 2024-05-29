@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { tryCatchWrapper, validateBody, authenticate } from '@/middlewares';
-import { userSchema, verifySchema } from '@/schema/user.scema';
+import { userSchema, verifySchema, resetSchema } from '@/schema/user.scema';
 import userController from '@/controllers/user.controller';
 
 const router: Router = Router();
@@ -36,7 +36,7 @@ router.post(
 
 router.post(
 	'/reset-password',
-	validateBody(verifySchema),
+	validateBody(resetSchema),
 	tryCatchWrapper(userController.changePassword.bind(userController)),
 );
 

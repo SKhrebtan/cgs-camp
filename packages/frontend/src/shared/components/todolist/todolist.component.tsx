@@ -9,15 +9,42 @@ import {
 	MySwiperComponent,
 	TableDesktop,
 	TodoElement,
+	TodoFilter,
 } from '~shared/components';
+import { useSearchParams } from 'react-router-dom';
+import { useMemo } from 'react';
 
 export const TodoList: React.FC = () => {
+	const [searchParams] = useSearchParams();
+	const params = {
+		search: null,
+		status: null,
+	};
+	const queryParams = useMemo(
+		() => Object.fromEntries([...searchParams]),
+		[searchParams],
+	);
+
+	const { status, search } = queryParams;
+
+	if (search) {
+		params.search = search;
+	} else {
+		delete params.search;
+	}
+	if (status && status !== 'all') {
+		params.status = status.toLowerCase();
+	} else {
+		delete params.status;
+	}
+
 	const mediaWatcher = useMediaObserver();
-	const { data, isLoading, error } = useGetAllTodos();
+	const { data, isLoading, error } = useGetAllTodos(params);
 	const { isOpen, openModal, closeModal } = useModal();
 
 	return (
 		<div className={wrapperStyles}>
+			<TodoFilter />
 			<button
 				type="button"
 				className="bp5-button bp5-intent-primary"
@@ -55,12 +82,3 @@ export const TodoList: React.FC = () => {
 };
 
 export default TodoList;
-
-// import { useTodoStore } from '~/store/todos.store';
-// import { Todo } from '~/types/todo.type';
-// const fetchTodos = useTodoStore((state) => state.fetchTodos);
-// const todos: Todo[] = useTodoStore((state) => state.todos);
-// const addNewTodo = useTodoStore((state) => state.addNewTodo);
-// useEffect(() => {
-// 	fetchTodos();
-// }, [fetchTodos]);
