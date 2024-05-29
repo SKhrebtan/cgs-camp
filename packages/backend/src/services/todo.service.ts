@@ -1,8 +1,7 @@
 import { PrismaClient } from '@prisma/client';
-import { TodoType } from '@/types/todos.type';
-import { UserType } from '@/types/users.type';
+import { TodoType, UserType, FilterType, StatusEnum } from '@/types';
 import { HttpError } from '@/helpers/http-error';
-import { FilterType } from '@/types/filter.type';
+
 export const prisma = new PrismaClient();
 
 export default class TodoService {
@@ -15,9 +14,11 @@ export default class TodoService {
 					search
 						? { title: { contains: search, mode: 'insensitive' } }
 						: {},
-					status === 'completed' ? { isCompleted: true } : {},
-					status === 'private' ? { isPrivate: true } : {},
-					status === 'public' ? { isPrivate: false } : {},
+					status === StatusEnum.Completed
+						? { isCompleted: true }
+						: {},
+					status === StatusEnum.Private ? { isPrivate: true } : {},
+					status === StatusEnum.Public ? { isPrivate: false } : {},
 				],
 			},
 		});

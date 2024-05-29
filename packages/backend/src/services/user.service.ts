@@ -1,12 +1,11 @@
 import { PrismaClient } from '@prisma/client';
-import { UserType } from '@/types/users.type';
+import { UserType, AuthType, ResetPasswordType } from '@/types';
 import { HttpError } from '@/helpers/http-error';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { sendMail } from '@/helpers/mail-service';
 import { nanoid } from 'nanoid';
-import { AuthType } from '@/types/auth.type';
-import { ResetPasswordType } from '@/types/reset-password.type';
+
 const { SECRET_KEY, BASE_URL, BASE_FRONTEND_URL } = process.env;
 
 if (!SECRET_KEY) {

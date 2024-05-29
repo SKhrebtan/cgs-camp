@@ -18,7 +18,7 @@ export const CompleteSwitcher: React.FC<CompleteWitcherProps> = ({
 }) => {
 	const { mutate } = useUpdateTodo();
 	const handleUpdate = (id, isCompleted, isPrivate): void => {
-		status === 'completed'
+		status === StatusEnum.Completed
 			? mutate({ id: String(id), body: { isCompleted: !isCompleted } })
 			: mutate({ id: String(id), body: { isPrivate: !isPrivate } });
 	};
@@ -28,7 +28,7 @@ export const CompleteSwitcher: React.FC<CompleteWitcherProps> = ({
 			type="button"
 			onClick={() => handleUpdate(id, isCompleted, isPrivate)}
 		>
-			{(status === 'completed' ? isCompleted : isPrivate) ? (
+			{(status === StatusEnum.Completed ? isCompleted : isPrivate) ? (
 				<motion.div
 					key="moon"
 					initial={{ x: '0', opacity: 0 }}
@@ -37,7 +37,9 @@ export const CompleteSwitcher: React.FC<CompleteWitcherProps> = ({
 					transition={{ duration: 0.5 }}
 					className={switcherStyles(
 						Boolean(
-							status === 'completed' ? isCompleted : isPrivate,
+							status === StatusEnum.Completed
+								? isCompleted
+								: isPrivate,
 						),
 					)}
 				></motion.div>
@@ -50,7 +52,9 @@ export const CompleteSwitcher: React.FC<CompleteWitcherProps> = ({
 					transition={{ duration: 0.5 }}
 					className={switcherStyles(
 						Boolean(
-							status === 'completed' ? isCompleted : isPrivate,
+							status === StatusEnum.Completed
+								? isCompleted
+								: isPrivate,
 						),
 					)}
 				></motion.div>
